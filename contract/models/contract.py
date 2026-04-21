@@ -611,7 +611,7 @@ class ContractContract(models.Model):
             invoice_vals = contract._prepare_invoice(date_ref)
             invoice_vals["invoice_line_ids"] = []
             for line in contract_lines:
-                invoice_line_vals = line._prepare_invoice_line()
+                invoice_line_vals = line._prepare_invoice_line(move_form=None)
                 if invoice_line_vals:
                     # Allow extension modules to return an empty dictionary for
                     # nullifying line. We should then cleanup certain values.

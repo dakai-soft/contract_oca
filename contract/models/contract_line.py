@@ -182,7 +182,7 @@ class ContractLine(models.Model):
             else:
                 rec.create_invoice_visibility = False
 
-    def _prepare_invoice_line(self):
+    def _prepare_invoice_line(self, move_form=None):
         self.ensure_one()
         dates = self._get_period_to_invoice(
             self.last_date_invoiced, self.recurring_next_date
