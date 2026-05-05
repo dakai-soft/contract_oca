@@ -88,15 +88,15 @@ class ContractLine(models.Model):
                 or not line.recurring_next_date
             ):
                 continue
-            if line.date_start and line.recurring_next_date:
-                if line.date_start > line.recurring_next_date:
-                    raise ValidationError(
-                        self.env._(
-                            "You can't have a date of next invoice anterior "
-                            "to the start of the contract line '%s'",
-                            line.name,
-                        )
-                    )
+            # if line.date_start and line.recurring_next_date:
+            #     if line.date_start > line.recurring_next_date:
+            #         raise ValidationError(
+            #             self.env._(
+            #                 "You can't have a date of next invoice anterior "
+            #                 "to the start of the contract line '%s'",
+            #                 line.name,
+            #             )
+            #         )
 
     @api.constrains(
         "date_start", "date_end", "last_date_invoiced", "recurring_next_date"
@@ -121,17 +121,17 @@ class ContractLine(models.Model):
                         rec.name,
                     )
                 )
-            if (
-                rec.recurring_next_date
-                and rec.recurring_next_date <= rec.last_date_invoiced
-            ):
-                raise ValidationError(
-                    self.env._(
-                        "You can't have the next invoice date before the date "
-                        "of last invoice for the contract line '%s'",
-                        rec.name,
-                    )
-                )
+            # if (
+            #     rec.recurring_next_date
+            #     and rec.recurring_next_date <= rec.last_date_invoiced
+            # ):
+            #     raise ValidationError(
+            #         self.env._(
+            #             "You can't have the next invoice date before the date "
+            #             "of last invoice for the contract line '%s'",
+            #             rec.name,
+            #         )
+            #     )
 
     @api.constrains("recurring_next_date")
     def _check_recurring_next_date_recurring_invoices(self):
