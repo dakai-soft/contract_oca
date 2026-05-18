@@ -11,6 +11,10 @@ from odoo.exceptions import ValidationError
 
 from .contract_line_constraints import get_allowed
 
+import logging
+
+_logger = logging.getLogger(__name__)
+
 
 class ContractLine(models.Model):
     _inherit = "contract.line"
@@ -176,6 +180,7 @@ class ContractLine(models.Model):
                 and rec.predecessor_contract_line_id.date_end
             ):
                 if rec.date_start <= rec.predecessor_contract_line_id.date_end:
+                    _logger.error(f"--------------{rec.date_start, rec.predecessor_contract_line_id.date_end} --------------")
                     raise ValidationError(
                         self.env._("Contract line and its predecessor overlapped")
                     )
