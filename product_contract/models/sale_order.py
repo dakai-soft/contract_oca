@@ -113,12 +113,12 @@ class SaleOrder(models.Model):
                 lines_without_contract.write({"contract_id": contract.id})
         return contract_model.browse(contracts)
 
-    def action_confirm(self):
-        """If we have a contract in the order, set it up"""
-        self.filtered(
-            lambda order: (order.company_id.create_contract_at_sale_order_confirmation)
-        ).action_create_contract()
-        return super().action_confirm()
+    # def action_confirm(self):
+    #     """If we have a contract in the order, set it up"""
+    #     self.filtered(
+    #         lambda order: (order.company_id.create_contract_at_sale_order_confirmation)
+    #     ).action_create_contract()
+    #     return super().action_confirm()
 
     @api.depends("order_line")
     def _compute_contract_count(self):
