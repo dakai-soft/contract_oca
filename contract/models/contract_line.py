@@ -196,7 +196,7 @@ class ContractLine(models.Model):
             "analytic_distribution": self.analytic_distribution,
             "sequence": self.sequence,
             "name": name,
-            "price_unit": self.price_unit,
+            "price_unit": self.price_unit*self.recurring_interval,
             "display_type": self.display_type or "product",
             "product_id": self.product_id.id,
         }
