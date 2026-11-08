@@ -12,8 +12,8 @@ class ContractLine(models.Model):
         check_company=True,
     )
 
-    def _prepare_invoice_line(self):
-        vals = super()._prepare_invoice_line()
+    def _prepare_invoice_line(self, move_form=None):
+        vals = super()._prepare_invoice_line(move_form=move_form)
         if self.analytic_tag_ids:
             vals["analytic_tag_ids"] = [Command.set(self.analytic_tag_ids.ids)]
         return vals
